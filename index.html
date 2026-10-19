@@ -210,12 +210,6 @@ h2{font-size:24px;font-weight:600;position:relative}
   <button class="btn hid" id="b7">Continue</button>
 </section>
 
-<!-- 8 · Photo frame -->
-<section class="sc night" id="s8">
-  <div class="pol" id="pol"><div class="bunt" id="bunt"></div><div class="ph" id="ph"></div>
-    <i class="bb" style="--c:#ff7eae;left:-26px;bottom:14px"></i><i class="bb" style="--c:#4fd0c4;right:-24px;bottom:50px"></i></div>
-  <button class="skip" id="skip">Skip ›</button>
-</section>
 
 <!-- 9 · Finale -->
 <section class="sc night" id="s9">
@@ -459,27 +453,6 @@ S[7] = () => {
 };
 $("b7").onclick = () => go(8);
 
-/* 8 · photo frame */
-(() => {
-  const fl = ["#ff7eae", "#ffd27d", "#4fd0c4", "#9c8cff", "#ff9a62"], b = $("bunt");
-  for (let i = 0; i < 9; i++) { const f = document.createElement("i"); f.style.borderTopColor = fl[i % 5]; b.appendChild(f); }
-})();
-S[8] = () => {
-  const ph = $("ph");
-  ph.innerHTML = MEDIA.src
-    ? (MEDIA.type === "video" ? `<video src="${MEDIA.src}" autoplay muted loop playsinline></video>` : `<img src="${MEDIA.src}" alt="">`)
-    : "<div>🎁<br><br>Add your photo in the code<br>(MEDIA at the top of the script)</div>";
-  restart($("s8")); $("pol").style.animation = ""; $("pol").style.transform = "";
-  SFX.whoosh(); T(() => { SFX.thud(); conf(innerWidth / 2, 0, 24, false); }, 900);
-  T(leave, 9000);
-};
-function leave() {
-  tm.forEach(clearTimeout); tm.length = 0; SFX.whoosh();
-  $("pol").style.animation = "none";
-  $("pol").animate([{ transform: "none" }, { transform: "translateY(-120vh) rotate(6deg)" }], { duration: 700, easing: "ease-in", fill: "forwards" });
-  T(() => go(9), 650);
-}
-$("skip").onclick = leave;
 
 /* 9 · finale */
 S[9] = () => {
